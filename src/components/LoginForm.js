@@ -11,29 +11,41 @@ const LoginForm = () => {
     e.preventDefault();
     if (username === "admin" && password === "newton_school") {
       setIsLoggedIn(true);
+    } else {
+      setErrorMessage("Invalid username or password");
     }
   };
 
+  if (isLoggedIn) {
+    return <Redirect to="/dashboard" />;
+  }
+
   return (
     <div className="login-div">
-        <h1>Login Form</h1>
-        <form className="form">
-          <div className="username-div">
-              <label className="username-label">Username:</label>
-              <input
-                  className="username-input"
-                  type="text"
-              />
-          </div>
-          <div className="password-div">
-              <label className="password-label">Password:</label>
-              <input
-                  className="password-input"
-                  type="password"
-              />
-          </div>
-          <button type="submit" className="login-btn">Login</button>
-          <p className="error-message">{errorMessage}</p>
+      <h1>Login Form</h1>
+      <form className="form" onSubmit={handleLogin}>
+        <div className="username-div">
+          <label className="username-label">Username:</label>
+          <input
+            className="username-input"
+            type="text"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
+        </div>
+        <div className="password-div">
+          <label className="password-label">Password:</label>
+          <input
+            className="password-input"
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </div>
+        <button type="submit" className="login-btn">
+          Login
+        </button>
+        <p className="error-message">{errorMessage}</p>
       </form>
     </div>
   );
