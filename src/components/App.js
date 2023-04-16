@@ -1,26 +1,24 @@
-import React, { useState } from 'react';
+import React from 'react';
 import '../styles/App.css';
-import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import LoginForm from './LoginForm';
 import Dashboard from './Dashboard';
 
-const App = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
+function App() {
   return (
     <div id="main">
       <Router>
         <Switch>
           <Route exact path="/">
-            {isLoggedIn ? <Redirect to="/dashboard" /> : <LoginForm setIsLoggedIn={setIsLoggedIn} />}
+            <LoginForm />
           </Route>
           <Route path="/dashboard">
-            {!isLoggedIn ? <Redirect to="/" /> : <Dashboard setIsLoggedIn={setIsLoggedIn} />}
+            <Dashboard />
           </Route>
         </Switch>
       </Router>
     </div>
   );
-};
+}
 
 export default App;
